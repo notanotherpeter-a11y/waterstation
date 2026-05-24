@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaPure — Premium Water Refilling Station</title>
+  <meta name="description" content="Pure, safe, and affordable drinking water delivered or picked up. AquaPure Water Refilling Station — your trusted source for clean water.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #050e1a;
+      --bg2: #071525;
+      --bg3: #0a1e30;
+      --border: rgba(0,180,255,0.12);
+      --border2: rgba(255,255,255,0.07);
+      --text: #e8f4fd;
+      --text2: #7ab3d0;
+      --text3: #4a7a96;
+      --blue: #00b4ff;
+      --blue2: #0077cc;
+      --cyan: #00e5ff;
+      --teal: #00c9b1;
+      --accent: #00b4ff;
+      --glow: rgba(0,180,255,0.18);
+      --font: 'Inter', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --r: 12px;
+      --r2: 20px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.6; overflow-x: hidden; }
+
+    /* Scroll bar */
+    #scroll-bar { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--blue), var(--cyan)); z-index: 9999; width: 0%; transition: width 0.1s; }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; padding: 1rem 2rem; gap: 1.5rem; transition: background 0.3s, border-color 0.3s; border-bottom: 1px solid transparent; }
+    nav.scrolled { background: rgba(5,14,26,0.92); backdrop-filter: blur(16px); border-color: var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--text); text-decoration: none; }
+    .nav-logo-icon { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--blue), var(--teal)); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: 0 0 14px rgba(0,180,255,0.4); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; margin-left: auto; }
+    .nav-links a { font-size: 0.83rem; color: var(--text2); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--blue); color: #fff; font-size: 0.82rem; font-weight: 600; padding: 0.55rem 1.3rem; border-radius: var(--r); text-decoration: none; transition: opacity 0.2s, transform 0.2s; box-shadow: 0 0 20px rgba(0,180,255,0.3); }
+    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* ── HERO ── */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 8rem 2rem 5rem; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-gradient { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 60% 30%, rgba(0,180,255,0.08) 0%, transparent 70%), radial-gradient(ellipse 40% 50% at 20% 80%, rgba(0,201,177,0.06) 0%, transparent 60%); }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0,180,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,180,255,0.04) 1px, transparent 1px); background-size: 48px 48px; }
+    .hero-blob1 { position: absolute; top: -20%; right: -10%; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(0,180,255,0.07) 0%, transparent 65%); animation: blobFloat 12s ease-in-out infinite; }
+    .hero-blob2 { position: absolute; bottom: -30%; left: -5%; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(0,201,177,0.05) 0%, transparent 65%); animation: blobFloat 15s ease-in-out infinite reverse; }
+    @keyframes blobFloat { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,-30px)} }
+    .hero-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 460px; align-items: center; gap: 4rem; }
+    @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; text-align: center; } .hero-visual { order: -1; } }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(0,180,255,0.08); border: 1px solid rgba(0,180,255,0.2); border-radius: 100px; padding: 0.3rem 0.9rem 0.3rem 0.5rem; margin-bottom: 1.5rem; }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 6px var(--cyan); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+    .badge-text { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: var(--blue); text-transform: uppercase; }
+    .hero-headline { font-size: clamp(2.6rem, 5vw, 4.2rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+    .hero-headline .grad { background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 50%, var(--teal) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 1.05rem; color: var(--text2); max-width: 500px; line-height: 1.8; margin-bottom: 2.5rem; }
+    .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.9rem; font-weight: 600; padding: 0.75rem 1.75rem; border-radius: var(--r); border: 1px solid transparent; cursor: pointer; text-decoration: none; transition: all 0.22s; font-family: var(--font); }
+    .btn-primary { background: linear-gradient(135deg, var(--blue), var(--blue2)); color: #fff; box-shadow: 0 0 28px rgba(0,180,255,0.35); }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); box-shadow: 0 0 40px rgba(0,180,255,0.5); }
+    .btn-secondary { background: rgba(0,180,255,0.07); color: var(--text); border-color: rgba(0,180,255,0.25); }
+    .btn-secondary:hover { background: rgba(0,180,255,0.14); border-color: var(--blue); }
+    .hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+    @media (max-width: 900px) { .hero-stats { justify-content: center; } .hero-sub { margin: 0 auto 2.5rem; } .hero-actions { justify-content: center; } }
+    .hero-stat-val { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); }
+    .hero-stat-val span { background: linear-gradient(135deg, var(--blue), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-stat-label { font-size: 0.75rem; color: var(--text3); margin-top: 0.1rem; }
+
+    /* Hero Visual — Water Jug */
+    .hero-visual { display: flex; align-items: center; justify-content: center; }
+    .jug-wrap { position: relative; width: 340px; height: 400px; }
+    .jug-glow { position: absolute; inset: -40px; border-radius: 50%; background: radial-gradient(circle, rgba(0,180,255,0.18) 0%, transparent 65%); animation: glowPulse 3s ease-in-out infinite; }
+    @keyframes glowPulse { 0%,100%{opacity:0.7} 50%{opacity:1} }
+    .jug-svg { width: 100%; height: 100%; animation: jugFloat 5s ease-in-out infinite; filter: drop-shadow(0 20px 60px rgba(0,180,255,0.35)); }
+    @keyframes jugFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-18px)} }
+    .jug-ring1 { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 380px; height: 380px; border-radius: 50%; border: 1px solid rgba(0,180,255,0.1); animation: ringExpand 3s ease-in-out infinite; }
+    .jug-ring2 { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 440px; height: 440px; border-radius: 50%; border: 1px solid rgba(0,180,255,0.06); animation: ringExpand 3s ease-in-out infinite 0.8s; }
+    @keyframes ringExpand { 0%,100%{opacity:0.5;transform:translate(-50%,-50%) scale(0.95)} 50%{opacity:1;transform:translate(-50%,-50%) scale(1.02)} }
+    .float-badge { position: absolute; background: rgba(5,14,26,0.85); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: var(--r); padding: 0.65rem 1rem; display: flex; align-items: center; gap: 0.55rem; box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
+    .float-badge1 { top: 10%; right: -20px; }
+    .float-badge2 { bottom: 20%; left: -20px; }
+    .float-badge-icon { font-size: 1.3rem; }
+    .float-badge-text { font-size: 0.72rem; font-weight: 600; color: var(--text); white-space: nowrap; }
+    .float-badge-sub { font-size: 0.62rem; color: var(--text2); }
+
+    /* ── SECTIONS ── */
+    section { max-width: 1100px; margin: 0 auto; padding: 5.5rem 2rem; position: relative; z-index: 2; }
+    .section-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; color: var(--blue); text-transform: uppercase; margin-bottom: 0.75rem; }
+    .section-title { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1rem; }
+    .section-sub { font-size: 1rem; color: var(--text2); max-width: 560px; line-height: 1.8; }
+    .section-head-center { text-align: center; }
+    .section-head-center .section-sub { margin: 0 auto; }
+    .divider { border: none; border-top: 1px solid var(--border2); margin: 0; }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap { overflow: hidden; border-top: 1px solid var(--border2); border-bottom: 1px solid var(--border2); padding: 0.8rem 0; background: var(--bg2); position: relative; z-index: 2; }
+    .marquee-track { display: flex; gap: 2.5rem; animation: marquee 28s linear infinite; white-space: nowrap; width: max-content; }
+    .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .marquee-item { display: flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--text3); text-transform: uppercase; }
+    .marquee-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--blue); }
+
+    /* ── FEATURES ── */
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 3rem; }
+    .feature-card { background: var(--bg2); border: 1px solid var(--border2); border-radius: var(--r2); padding: 2rem 1.75rem; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
+    .feature-card:hover { border-color: rgba(0,180,255,0.3); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,180,255,0.08); }
+    .feature-icon { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.25rem; background: rgba(0,180,255,0.08); border: 1px solid rgba(0,180,255,0.15); }
+    .feature-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .feature-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.75; }
+
+    /* ── PRODUCTS ── */
+    .products-section { background: var(--bg2); }
+    .products-section > * { max-width: 1100px; margin: 0 auto; padding: 5.5rem 2rem; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .product-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r2); padding: 2rem 1.5rem; text-align: center; transition: all 0.3s; position: relative; overflow: hidden; }
+    .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--blue), var(--teal)); opacity: 0; transition: opacity 0.3s; }
+    .product-card:hover { border-color: rgba(0,180,255,0.3); transform: translateY(-5px); box-shadow: 0 16px 50px rgba(0,0,0,0.3); }
+    .product-card:hover::before { opacity: 1; }
+    .product-card.popular { border-color: rgba(0,180,255,0.35); box-shadow: 0 0 40px rgba(0,180,255,0.08); }
+    .popular-tag { position: absolute; top: 1rem; right: 1rem; background: linear-gradient(135deg, var(--blue), var(--teal)); color: #fff; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em; padding: 0.2rem 0.6rem; border-radius: 100px; text-transform: uppercase; }
+    .product-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+    .product-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .product-size { font-family: var(--mono); font-size: 0.7rem; color: var(--text3); margin-bottom: 1.5rem; }
+    .product-price { font-size: 2rem; font-weight: 900; letter-spacing: -0.03em; }
+    .product-price .currency { font-size: 1rem; font-weight: 500; color: var(--text2); vertical-align: super; }
+    .product-price-note { font-size: 0.73rem; color: var(--text3); margin-top: 0.25rem; }
+    .product-features { list-style: none; margin: 1.5rem 0; text-align: left; display: flex; flex-direction: column; gap: 0.5rem; }
+    .product-features li { font-size: 0.82rem; color: var(--text2); display: flex; align-items: center; gap: 0.5rem; }
+    .product-features li::before { content: '✓'; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+    .btn-product { width: 100%; justify-content: center; background: rgba(0,180,255,0.09); color: var(--text); border-color: rgba(0,180,255,0.25); }
+    .btn-product:hover { background: var(--blue); border-color: var(--blue); }
+    .product-card.popular .btn-product { background: linear-gradient(135deg, var(--blue), var(--blue2)); border-color: transparent; box-shadow: 0 0 20px rgba(0,180,255,0.3); }
+    .product-card.popular .btn-product:hover { opacity: 0.88; }
+
+    /* ── HOW IT WORKS ── */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; position: relative; }
+    .steps::before { content: ''; position: absolute; top: 36px; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), var(--blue), var(--border), transparent); }
+    @media (max-width: 768px) { .steps::before { display: none; } }
+    .step { text-align: center; padding: 0 1rem; }
+    .step-num { width: 56px; height: 56px; border-radius: 50%; background: var(--bg2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-family: var(--mono); font-size: 0.85rem; font-weight: 600; color: var(--blue); position: relative; z-index: 1; transition: background 0.3s, box-shadow 0.3s; }
+    .step:hover .step-num { background: rgba(0,180,255,0.12); box-shadow: 0 0 20px rgba(0,180,255,0.2); }
+    .step-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .step-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .step-desc { font-size: 0.82rem; color: var(--text2); line-height: 1.7; }
+
+    /* ── WHY US ── */
+    .why-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    @media (max-width: 768px) { .why-layout { grid-template-columns: 1fr; } }
+    .why-visual { position: relative; }
+    .why-card-main { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r2); padding: 2rem; }
+    .why-water-bar { margin-bottom: 1.25rem; }
+    .why-bar-label { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text2); margin-bottom: 0.4rem; }
+    .why-bar-track { height: 6px; background: rgba(255,255,255,0.06); border-radius: 100px; overflow: hidden; }
+    .why-bar-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--blue), var(--teal)); animation: fillBar 1.8s ease-out forwards; }
+    @keyframes fillBar { from{width:0} }
+    .why-cert { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .cert-badge { background: rgba(0,180,255,0.07); border: 1px solid rgba(0,180,255,0.2); border-radius: var(--r); padding: 0.4rem 0.8rem; font-size: 0.72rem; color: var(--blue); font-family: var(--mono); }
+    .why-float { position: absolute; bottom: -20px; right: -20px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r2); padding: 1.25rem 1.5rem; box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+    .why-float-val { font-size: 1.6rem; font-weight: 900; color: var(--cyan); letter-spacing: -0.03em; }
+    .why-float-label { font-size: 0.72rem; color: var(--text2); margin-top: 0.1rem; }
+    .why-list { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; }
+    .why-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .why-icon { width: 42px; height: 42px; border-radius: 12px; background: rgba(0,180,255,0.08); border: 1px solid rgba(0,180,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .why-item-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .why-item-desc { font-size: 0.82rem; color: var(--text2); line-height: 1.65; }
+
+    /* ── DELIVERY ── */
+    .delivery-section { background: linear-gradient(135deg, rgba(0,180,255,0.04), rgba(0,201,177,0.03)); border-top: 1px solid var(--border2); border-bottom: 1px solid var(--border2); }
+    .delivery-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    @media (max-width: 768px) { .delivery-layout { grid-template-columns: 1fr; gap: 2rem; } }
+    .delivery-info h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1rem; }
+    .delivery-info p { color: var(--text2); line-height: 1.8; margin-bottom: 1.5rem; font-size: 0.95rem; }
+    .delivery-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+    .chip { background: rgba(0,180,255,0.07); border: 1px solid rgba(0,180,255,0.18); border-radius: 100px; padding: 0.35rem 0.9rem; font-size: 0.77rem; color: var(--text2); }
+    .delivery-times { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .time-card { background: var(--bg2); border: 1px solid var(--border2); border-radius: var(--r); padding: 1.25rem; }
+    .time-label { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.1em; color: var(--text3); text-transform: uppercase; margin-bottom: 0.25rem; }
+    .time-val { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+
+    /* ── TESTIMONIALS ── */
+    .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 3rem; }
+    .testi-card { background: var(--bg2); border: 1px solid var(--border2); border-radius: var(--r2); padding: 1.75rem; transition: border-color 0.3s, transform 0.3s; }
+    .testi-card:hover { border-color: rgba(0,180,255,0.25); transform: translateY(-3px); }
+    .testi-stars { color: var(--cyan); font-size: 0.85rem; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+    .testi-text { font-size: 0.9rem; color: var(--text2); line-height: 1.75; margin-bottom: 1.25rem; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: 0.75rem; }
+    .testi-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--teal)); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 700; color: #fff; }
+    .testi-name { font-size: 0.85rem; font-weight: 600; }
+    .testi-loc { font-size: 0.72rem; color: var(--text3); }
+
+    /* ── BOOKING ── */
+    .booking-layout { display: grid; grid-template-columns: 1fr 420px; gap: 4rem; align-items: start; }
+    @media (max-width: 900px) { .booking-layout { grid-template-columns: 1fr; } }
+    .booking-info h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1rem; }
+    .booking-info p { color: var(--text2); line-height: 1.8; font-size: 0.95rem; margin-bottom: 2rem; }
+    .contact-item { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; font-size: 0.88rem; color: var(--text2); }
+    .contact-icon { width: 38px; height: 38px; border-radius: 10px; background: rgba(0,180,255,0.08); border: 1px solid rgba(0,180,255,0.18); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .booking-form { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r2); padding: 2rem; }
+    .form-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-label { font-size: 0.75rem; font-weight: 600; color: var(--text2); letter-spacing: 0.04em; display: block; margin-bottom: 0.4rem; }
+    .form-input { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--border2); border-radius: var(--r); padding: 0.7rem 0.95rem; color: var(--text); font-family: var(--font); font-size: 0.88rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .form-input:focus { border-color: rgba(0,180,255,0.4); box-shadow: 0 0 0 3px rgba(0,180,255,0.08); }
+    .form-input::placeholder { color: var(--text3); }
+    .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a7a96' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+    .btn-submit { width: 100%; justify-content: center; margin-top: 0.5rem; background: linear-gradient(135deg, var(--blue), var(--blue2)); color: #fff; box-shadow: 0 0 24px rgba(0,180,255,0.3); }
+    .btn-submit:hover { opacity: 0.88; transform: translateY(-2px); box-shadow: 0 0 36px rgba(0,180,255,0.45); }
+
+    /* ── FAQ ── */
+    .faq-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 3rem; max-width: 780px; margin-left: auto; margin-right: auto; }
+    .faq-item { background: var(--bg2); border: 1px solid var(--border2); border-radius: var(--r); overflow: hidden; transition: border-color 0.2s; }
+    .faq-item:hover { border-color: rgba(0,180,255,0.25); }
+    .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 1.1rem 1.4rem; cursor: pointer; font-size: 0.9rem; font-weight: 600; user-select: none; }
+    .faq-arrow { font-size: 0.75rem; color: var(--text3); transition: transform 0.25s; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); color: var(--blue); }
+    .faq-a { display: none; padding: 0 1.4rem 1.1rem; font-size: 0.85rem; color: var(--text2); line-height: 1.8; border-top: 1px solid var(--border2); padding-top: 1rem; }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--bg2); border-top: 1px solid var(--border2); padding: 4rem 2rem 2rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+    @media (max-width: 480px) { .footer-top { grid-template-columns: 1fr; } }
+    .footer-brand p { font-size: 0.83rem; color: var(--text3); line-height: 1.8; margin-top: 0.75rem; max-width: 300px; }
+    .footer-col-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text2); margin-bottom: 1rem; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .footer-links a { font-size: 0.82rem; color: var(--text3); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--blue); }
+    .footer-bottom { border-top: 1px solid var(--border2); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-size: 0.78rem; color: var(--text3); }
+    .footer-social { display: flex; gap: 0.75rem; }
+    .social-btn { width: 36px; height: 36px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; text-decoration: none; color: var(--text2); transition: all 0.2s; }
+    .social-btn:hover { background: rgba(0,180,255,0.1); border-color: rgba(0,180,255,0.3); color: var(--blue); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── CHATBOT ── */
+    #chat-toggle { position: fixed; bottom: 2rem; right: 2rem; z-index: 300; width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--blue2)); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; box-shadow: 0 0 28px rgba(0,180,255,0.45); transition: transform 0.2s; }
+    #chat-toggle:hover { transform: scale(1.08); }
+    #chat-window { position: fixed; bottom: 5.5rem; right: 2rem; z-index: 300; width: 320px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r2); box-shadow: 0 24px 80px rgba(0,0,0,0.6); display: none; flex-direction: column; overflow: hidden; }
+    #chat-window.open { display: flex; animation: slideUp 0.25s ease; }
+    @keyframes slideUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    .chat-header { background: linear-gradient(135deg, var(--blue2), #00456e); padding: 1rem 1.25rem; display: flex; align-items: center; gap: 0.6rem; }
+    .chat-avatar { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+    .chat-name { font-size: 0.88rem; font-weight: 700; }
+    .chat-status { font-size: 0.68rem; color: rgba(255,255,255,0.7); }
+    .chat-body { padding: 1rem; max-height: 320px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.6rem; }
+    .chat-msg { background: rgba(255,255,255,0.05); border-radius: 12px 12px 12px 4px; padding: 0.65rem 0.9rem; font-size: 0.82rem; color: var(--text2); max-width: 90%; line-height: 1.6; }
+    .chat-msg.user { background: rgba(0,180,255,0.15); border-radius: 12px 12px 4px 12px; align-self: flex-end; color: var(--text); }
+    .chat-quick { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.25rem; }
+    .chat-qbtn { background: rgba(0,180,255,0.08); border: 1px solid rgba(0,180,255,0.2); border-radius: var(--r); padding: 0.45rem 0.8rem; font-size: 0.78rem; color: var(--blue); cursor: pointer; text-align: left; transition: background 0.2s; }
+    .chat-qbtn:hover { background: rgba(0,180,255,0.18); }
+    .chat-typing { display: flex; align-items: center; gap: 0.3rem; padding: 0.65rem 0.9rem; background: rgba(255,255,255,0.05); border-radius: 12px; width: fit-content; }
+    .typing-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text3); animation: typingDot 1.2s ease-in-out infinite; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingDot { 0%,100%{opacity:0.3;transform:translateY(0)} 50%{opacity:1;transform:translateY(-3px)} }
+  </style>
+</head>
+<body>
+
+<div id="scroll-bar"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">💧</div>
+    AquaPure
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Why Us</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#delivery">Delivery</a></li>
+    <li><a href="#booking">Order</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta">Order Now →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-gradient"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-blob1"></div>
+    <div class="hero-blob2"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">Now Serving Your Area</span>
+      </div>
+      <h1 class="hero-headline">
+        Pure Water,<br>
+        <span class="grad">Delivered Fresh</span><br>
+        to Your Door.
+      </h1>
+      <p class="hero-sub">Crystal-clear, purified drinking water from your trusted local refilling station. Pick up or get it delivered — fast, safe, and always affordable.</p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn btn-primary">🛒 Order Now</a>
+        <a href="#products" class="btn btn-secondary">View Products</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-val"><span>500+</span></div>
+          <div class="hero-stat-label">Happy Customers</div>
+        </div>
+        <div>
+          <div class="hero-stat-val"><span>7</span> Stages</div>
+          <div class="hero-stat-label">Purification Process</div>
+        </div>
+        <div>
+          <div class="hero-stat-val"><span>DOH</span></div>
+          <div class="hero-stat-label">Certified & Tested</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="jug-wrap">
+        <div class="jug-glow"></div>
+        <div class="jug-ring1"></div>
+        <div class="jug-ring2"></div>
+        <!-- Water Jug SVG -->
+        <svg class="jug-svg" viewBox="0 0 280 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="jugBody" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#0a3a5c" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#071525" stop-opacity="0.95"/>
+            </linearGradient>
+            <linearGradient id="waterFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#00b4ff" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#0077cc" stop-opacity="0.7"/>
+            </linearGradient>
+            <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="white" stop-opacity="0.15"/>
+              <stop offset="50%" stop-color="white" stop-opacity="0.05"/>
+              <stop offset="100%" stop-color="white" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="capGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#00e5ff"/>
+              <stop offset="100%" stop-color="#00b4ff"/>
+            </linearGradient>
+            <clipPath id="jugClip">
+              <path d="M60 80 Q50 80 45 100 L30 290 Q28 320 60 330 L220 330 Q252 320 250 290 L235 100 Q230 80 220 80 Z"/>
+            </clipPath>
+          </defs>
+          <!-- Jug Body -->
+          <path d="M60 80 Q50 80 45 100 L30 290 Q28 320 60 330 L220 330 Q252 320 250 290 L235 100 Q230 80 220 80 Z" fill="url(#jugBody)" stroke="rgba(0,180,255,0.3)" stroke-width="1.5"/>
+          <!-- Water inside -->
+          <rect x="30" y="160" width="220" height="170" fill="url(#waterFill)" clip-path="url(#jugClip)" opacity="0.85"/>
+          <!-- Water ripple -->
+          <ellipse cx="140" cy="162" rx="100" ry="10" fill="#00e5ff" opacity="0.25"/>
+          <ellipse cx="140" cy="163" rx="80" ry="7" fill="#00e5ff" opacity="0.15"/>
+          <!-- Shine -->
+          <path d="M60 80 Q50 80 45 100 L30 290 Q28 320 60 330 L220 330 Q252 320 250 290 L235 100 Q230 80 220 80 Z" fill="url(#shine)"/>
+          <!-- Neck -->
+          <rect x="100" y="40" width="80" height="45" rx="12" fill="#0a2f4a" stroke="rgba(0,180,255,0.4)" stroke-width="1.5"/>
+          <!-- Cap -->
+          <rect x="95" y="20" width="90" height="28" rx="10" fill="url(#capGrad)"/>
+          <rect x="105" y="26" width="70" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+          <!-- Handle -->
+          <path d="M250 120 Q300 140 300 200 Q300 260 250 270" stroke="rgba(0,180,255,0.4)" stroke-width="10" fill="none" stroke-linecap="round"/>
+          <path d="M250 120 Q300 140 300 200 Q300 260 250 270" stroke="rgba(0,180,255,0.1)" stroke-width="16" fill="none" stroke-linecap="round"/>
+          <!-- Label area -->
+          <rect x="65" y="170" width="150" height="80" rx="10" fill="rgba(0,180,255,0.08)" stroke="rgba(0,180,255,0.15)" stroke-width="1"/>
+          <text x="140" y="205" text-anchor="middle" fill="rgba(0,180,255,0.9)" font-size="13" font-weight="700" font-family="Inter, sans-serif">AquaPure</text>
+          <text x="140" y="224" text-anchor="middle" fill="rgba(0,229,255,0.6)" font-size="8" font-family="JetBrains Mono, monospace" letter-spacing="2">PURIFIED WATER</text>
+          <!-- Bubbles -->
+          <circle cx="80" cy="250" r="5" fill="rgba(0,229,255,0.25)" opacity="0.7"/>
+          <circle cx="100" cy="220" r="3.5" fill="rgba(0,229,255,0.2)"/>
+          <circle cx="170" cy="240" r="4" fill="rgba(0,229,255,0.2)"/>
+          <circle cx="190" cy="210" r="3" fill="rgba(0,229,255,0.15)"/>
+          <circle cx="130" cy="270" r="4.5" fill="rgba(0,229,255,0.2)"/>
+        </svg>
+
+        <div class="float-badge float-badge1">
+          <div class="float-badge-icon">🏅</div>
+          <div>
+            <div class="float-badge-text">DOH Certified</div>
+            <div class="float-badge-sub">Safe & Regulated</div>
+          </div>
+        </div>
+        <div class="float-badge float-badge2">
+          <div class="float-badge-icon">⚡</div>
+          <div>
+            <div class="float-badge-text">Same-Day Delivery</div>
+            <div class="float-badge-sub">Order before 2PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot"></span>7-Stage Purification</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>DOH Certified</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Same-Day Delivery</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Alkaline Available</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Sanitized Containers</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Affordable Rates</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Free Delivery on Orders ₱200+</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Open 7 Days a Week</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>7-Stage Purification</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>DOH Certified</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Same-Day Delivery</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Alkaline Available</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Sanitized Containers</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Affordable Rates</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Free Delivery on Orders ₱200+</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Open 7 Days a Week</span>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-label reveal">[ 01 ] Why Choose Us</div>
+  <h2 class="section-title reveal">Water You Can Trust,<br>Service You'll Love.</h2>
+  <p class="section-sub reveal">We don't just sell water — we guarantee purity, consistency, and convenience every single time.</p>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">🔬</div>
+      <div class="feature-title">7-Stage Purification</div>
+      <div class="feature-desc">Sediment filter → carbon filter → softener → reverse osmosis → UV sterilization → ozonation → remineralization. Pure science, pure water.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🏅</div>
+      <div class="feature-title">DOH Certified</div>
+      <div class="feature-desc">Fully licensed by the Department of Health. Our water undergoes regular lab testing to ensure it meets the highest safety standards.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🚚</div>
+      <div class="feature-title">Fast Delivery</div>
+      <div class="feature-desc">Order before 2PM and get your water delivered the same day. No waiting, no hassle — we come to you wherever you are in the area.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">♻️</div>
+      <div class="feature-title">Eco-Friendly Containers</div>
+      <div class="feature-desc">Bring your jug, we fill it up. Reusable containers mean less plastic waste. We also sanitize every container before refilling.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">💧</div>
+      <div class="feature-title">Alkaline Option</div>
+      <div class="feature-desc">Choose from purified, mineral, or alkaline water. Our alkaline water has a pH of 7.5–9.5 — perfect for active lifestyles and better hydration.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">💰</div>
+      <div class="feature-title">Always Affordable</div>
+      <div class="feature-desc">Quality water shouldn't break the bank. Our rates are among the most competitive in the area — no compromise on quality or price.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PRODUCTS / PRICING -->
+<div class="products-section">
+  <div>
+    <section id="products">
+      <div class="section-label reveal section-head-center">[ 02 ] Products & Pricing</div>
+      <h2 class="section-title reveal section-head-center">Simple, Honest Pricing.</h2>
+      <p class="section-sub reveal section-head-center">Pick the size that fits your household. All prices include container sanitization.</p>
+      <div class="products-grid">
+        <div class="product-card reveal">
+          <span class="product-icon">🥤</span>
+          <div class="product-name">Round Container</div>
+          <div class="product-size">[ 1 Gallon · ~3.8L ]</div>
+          <div class="product-price"><span class="currency">₱</span>10</div>
+          <div class="product-price-note">per refill</div>
+          <ul class="product-features">
+            <li>Purified or Alkaline</li>
+            <li>Great for travel mugs</li>
+            <li>Container sanitized</li>
+          </ul>
+          <a href="#booking" class="btn btn-product">Order →</a>
+        </div>
+        <div class="product-card popular reveal">
+          <div class="popular-tag">Most Popular</div>
+          <span class="product-icon">🫙</span>
+          <div class="product-name">Standard Slim Jug</div>
+          <div class="product-size">[ 5 Gallons · ~18.9L ]</div>
+          <div class="product-price"><span class="currency">₱</span>35</div>
+          <div class="product-price-note">per refill</div>
+          <ul class="product-features">
+            <li>Purified, Mineral, or Alkaline</li>
+            <li>Fits standard dispensers</li>
+            <li>Free delivery over ₱200</li>
+            <li>Container sanitized</li>
+          </ul>
+          <a href="#booking" class="btn btn-product btn-primary">Order →</a>
+        </div>
+        <div class="product-card reveal">
+          <span class="product-icon">🪣</span>
+          <div class="product-name">Wide Mouth Jug</div>
+          <div class="product-size">[ 5 Gallons · ~18.9L ]</div>
+          <div class="product-price"><span class="currency">₱</span>40</div>
+          <div class="product-price-note">per refill</div>
+          <ul class="product-features">
+            <li>Purified, Mineral, or Alkaline</li>
+            <li>Wide-neck for easy cleaning</li>
+            <li>Free delivery over ₱200</li>
+            <li>Container sanitized</li>
+          </ul>
+          <a href="#booking" class="btn btn-product">Order →</a>
+        </div>
+        <div class="product-card reveal">
+          <span class="product-icon">🛢️</span>
+          <div class="product-name">Bulk Refill</div>
+          <div class="product-size">[ 10+ Gallons · Group / Office ]</div>
+          <div class="product-price"><span class="currency">₱</span>30</div>
+          <div class="product-price-note">per gallon (bulk rate)</div>
+          <ul class="product-features">
+            <li>Best for offices & events</li>
+            <li>Priority scheduling</li>
+            <li>Free delivery included</li>
+            <li>Monthly subscription available</li>
+          </ul>
+          <a href="#booking" class="btn btn-product">Order →</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-label reveal section-head-center">[ 03 ] How It Works</div>
+  <h2 class="section-title reveal section-head-center">Getting Clean Water<br>Has Never Been Easier.</h2>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <div class="step-icon">📋</div>
+      <div class="step-title">Place Your Order</div>
+      <div class="step-desc">Fill out our quick order form or message us on WhatsApp with your address, jug size, and preferred schedule.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">02</div>
+      <div class="step-icon">🔄</div>
+      <div class="step-title">We Purify & Sanitize</div>
+      <div class="step-desc">Your container is sanitized and filled through our 7-stage purification process — fresh every time.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">03</div>
+      <div class="step-icon">🚚</div>
+      <div class="step-title">Delivery or Pick-Up</div>
+      <div class="step-desc">Choose same-day home delivery or swing by our station for quick pick-up. Open 7 days a week, 7AM–7PM.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">04</div>
+      <div class="step-icon">💧</div>
+      <div class="step-title">Enjoy Pure Water</div>
+      <div class="step-desc">Stay hydrated with crystal-clear, safe drinking water. Set up a subscription so you never run out.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- WHY US — Detailed -->
+<section id="quality">
+  <div class="why-layout">
+    <div class="why-visual reveal">
+      <div class="why-card-main">
+        <div class="section-label" style="margin-bottom:1rem;">[ Water Quality Report ]</div>
+        <div class="why-water-bar">
+          <div class="why-bar-label"><span>TDS (Total Dissolved Solids)</span><span>12 ppm ✓</span></div>
+          <div class="why-bar-track"><div class="why-bar-fill" style="width:95%"></div></div>
+        </div>
+        <div class="why-water-bar">
+          <div class="why-bar-label"><span>pH Level</span><span>7.8 — Slightly Alkaline ✓</span></div>
+          <div class="why-bar-track"><div class="why-bar-fill" style="width:88%"></div></div>
+        </div>
+        <div class="why-water-bar">
+          <div class="why-bar-label"><span>Bacteria Count</span><span>0 CFU/100mL ✓</span></div>
+          <div class="why-bar-track"><div class="why-bar-fill" style="width:100%"></div></div>
+        </div>
+        <div class="why-water-bar">
+          <div class="why-bar-label"><span>Turbidity (Clarity)</span><span>0.1 NTU ✓</span></div>
+          <div class="why-bar-track"><div class="why-bar-fill" style="width:99%"></div></div>
+        </div>
+        <div class="why-cert">
+          <span class="cert-badge">DOH Licensed</span>
+          <span class="cert-badge">FDA Registered</span>
+          <span class="cert-badge">Monthly Lab-Tested</span>
+        </div>
+      </div>
+      <div class="why-float">
+        <div class="why-float-val">99.9%</div>
+        <div class="why-float-label">Bacteria Removal Rate</div>
+      </div>
+    </div>
+    <div class="why-content">
+      <div class="section-label reveal">[ 04 ] Our Standards</div>
+      <h2 class="section-title reveal">We Take Water<br>Quality Seriously.</h2>
+      <ul class="why-list">
+        <li class="why-item reveal">
+          <div class="why-icon">🧪</div>
+          <div>
+            <div class="why-item-title">Monthly Lab Testing</div>
+            <div class="why-item-desc">Our water is tested every month by an accredited laboratory. Results are posted at the station — no secrets, full transparency.</div>
+          </div>
+        </li>
+        <li class="why-item reveal">
+          <div class="why-icon">🔆</div>
+          <div>
+            <div class="why-item-title">UV Sterilization</div>
+            <div class="why-item-desc">UV light kills 99.9% of bacteria and viruses — without chemicals. Your water is biologically safe, naturally.</div>
+          </div>
+        </li>
+        <li class="why-item reveal">
+          <div class="why-icon">🌊</div>
+          <div>
+            <div class="why-item-title">Reverse Osmosis</div>
+            <div class="why-item-desc">RO membranes filter out heavy metals, chlorine, and microscopic contaminants at the molecular level. What remains is pure H₂O.</div>
+          </div>
+        </li>
+        <li class="why-item reveal">
+          <div class="why-icon">✨</div>
+          <div>
+            <div class="why-item-title">Container Sanitation</div>
+            <div class="why-item-desc">Every jug is washed, rinsed, and UV-sanitized before refilling. Never worry about container cross-contamination again.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY -->
+<div class="delivery-section">
+  <section id="delivery">
+    <div class="delivery-layout">
+      <div class="delivery-info">
+        <div class="section-label reveal">[ 05 ] Delivery</div>
+        <h2 class="reveal">We Deliver to<br>Your Doorstep.</h2>
+        <p class="reveal">Free delivery for orders ₱200 and above. Orders below ₱200 have a minimal ₱20 delivery fee. We cover the entire barangay and surrounding areas.</p>
+        <div class="delivery-chips reveal">
+          <span class="chip">📍 Within 3km radius</span>
+          <span class="chip">🕒 Same-day (order by 2PM)</span>
+          <span class="chip">🆓 Free on ₱200+</span>
+          <span class="chip">📱 Track via WhatsApp</span>
+        </div>
+        <a href="#booking" class="btn btn-primary reveal">Schedule Delivery →</a>
+      </div>
+      <div class="delivery-times reveal">
+        <div class="time-card">
+          <div class="time-label">Monday – Friday</div>
+          <div class="time-val">7:00 AM – 7:00 PM</div>
+        </div>
+        <div class="time-card">
+          <div class="time-label">Saturday</div>
+          <div class="time-val">7:00 AM – 6:00 PM</div>
+        </div>
+        <div class="time-card">
+          <div class="time-label">Sunday</div>
+          <div class="time-val">8:00 AM – 5:00 PM</div>
+        </div>
+        <div class="time-card">
+          <div class="time-label">Delivery Fee</div>
+          <div class="time-val">₱20 (Free on ₱200+)</div>
+        </div>
+        <div class="time-card" style="grid-column:1/-1; border-color:rgba(0,180,255,0.2);">
+          <div class="time-label">Station Pick-Up</div>
+          <div class="time-val">Walk-in anytime during business hours — no queue, in and out in minutes.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-label reveal section-head-center">[ 06 ] Reviews</div>
+  <h2 class="section-title reveal section-head-center">What Our Customers Say.</h2>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Sobrang bilis ng delivery! Nag-order ako ng 10AM tapos dumating na ng 12NN. Water quality is chef's kiss — walang amoy, malinis talaga. Sulit na sulit!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">M</div>
+        <div>
+          <div class="testi-name">Maria Santos</div>
+          <div class="testi-loc">Regular Customer · 2 years</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"We use AquaPure for our office. 10 gallons every week, never late, never missed. The alkaline water is great — our team feels more energized. Highly recommended!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">R</div>
+        <div>
+          <div class="testi-name">Rodel Cruz</div>
+          <div class="testi-loc">Office Manager · Bulk Customer</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Dati nagpapalit-palit ako ng water station. Ngayon ayoko na lumipat sa AquaPure. Linis ng tubig, mabait pa yung staff. DOH certified talaga kaya panatag ako."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">L</div>
+        <div>
+          <div class="testi-name">Lenie Reyes</div>
+          <div class="testi-loc">Happy Customer · 1 year</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- BOOKING / ORDER -->
+<section id="booking">
+  <div class="booking-layout">
+    <div class="booking-info">
+      <div class="section-label reveal">[ 07 ] Order Now</div>
+      <h2 class="reveal">Ready for Clean<br>Water at Home?</h2>
+      <p class="reveal">Fill in the form and we'll send your order details straight to WhatsApp. We'll confirm and arrange delivery or pick-up in minutes.</p>
+      <div class="contact-item reveal">
+        <div class="contact-icon">📞</div>
+        <span>+63 9XX XXX XXXX</span>
+      </div>
+      <div class="contact-item reveal">
+        <div class="contact-icon">💬</div>
+        <span>Message us on Facebook or WhatsApp</span>
+      </div>
+      <div class="contact-item reveal">
+        <div class="contact-icon">📍</div>
+        <span>123 Purok Malinis, Brgy. Maliwanag</span>
+      </div>
+      <div class="contact-item reveal">
+        <div class="contact-icon">🕒</div>
+        <span>Open Mon–Sat 7AM–7PM · Sun 8AM–5PM</span>
+      </div>
+    </div>
+    <div class="booking-form reveal">
+      <div class="form-title">💧 Place Your Order</div>
+      <form id="order-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name *</label>
+            <input type="text" class="form-input" placeholder="Juan" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name *</label>
+            <input type="text" class="form-input" placeholder="dela Cruz" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number *</label>
+          <input type="tel" class="form-input" placeholder="+63 9XX XXX XXXX" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Product *</label>
+          <select class="form-input form-select" required>
+            <option value="" disabled selected>Choose a product</option>
+            <option>1 Gallon — Round Container (₱10)</option>
+            <option>5 Gallons — Slim Jug (₱35)</option>
+            <option>5 Gallons — Wide Mouth Jug (₱40)</option>
+            <option>Bulk / Office (10+ Gallons) — ₱30/gallon</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Water Type *</label>
+            <select class="form-input form-select" required>
+              <option value="" disabled selected>Select type</option>
+              <option>Purified</option>
+              <option>Mineral</option>
+              <option>Alkaline</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Quantity *</label>
+            <input type="number" class="form-input" min="1" placeholder="e.g. 2" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Delivery Method *</label>
+          <select class="form-input form-select" required>
+            <option value="" disabled selected>Delivery or pick-up?</option>
+            <option>Home Delivery</option>
+            <option>Station Pick-Up</option>
+          </select>
+        </div>
+        <div class="form-group" id="address-group">
+          <label class="form-label">Delivery Address</label>
+          <input type="text" class="form-input" placeholder="Street, Purok, Barangay">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Preferred Schedule</label>
+          <input type="date" class="form-input">
+        </div>
+        <button type="submit" class="btn btn-submit">Send via WhatsApp →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-label reveal section-head-center">[ 08 ] FAQ</div>
+  <h2 class="section-title reveal section-head-center">Common Questions.</h2>
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">Do I need to bring my own jug? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Yes, for refilling you need to bring your own container. However, we also sell brand-new jugs if you need one. We sanitize every container before filling, regardless of where it came from.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">What is the difference between purified, mineral, and alkaline water? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Purified water has contaminants removed via RO and UV. Mineral water has essential minerals re-added after purification. Alkaline water has a higher pH (7.5–9.5), which some prefer for better hydration and antioxidant properties.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">Is same-day delivery really available? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Yes! Orders placed before 2:00 PM are delivered the same day. Orders placed after 2PM will be scheduled for the next morning. We'll confirm via WhatsApp once your order is received.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">How do I know the water is safe? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">We are DOH-licensed and our water undergoes monthly laboratory testing. Results are displayed at our station and available upon request. Our 7-stage purification process ensures zero bacteria and contaminants.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">Do you offer subscriptions or regular delivery schedules? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Yes! You can set a weekly or bi-weekly delivery schedule. Just let us know your preferred day and quantity — we'll automatically add you to our delivery route and you won't have to re-order every time.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)">What is the minimum order for free delivery? <span class="faq-arrow">▼</span></div>
+      <div class="faq-a">Orders totaling ₱200 or more get free delivery. Below ₱200, there's a flat ₱20 delivery fee. Bulk orders (office/events) always include free delivery regardless of amount.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" style="margin-bottom:0.75rem;display:inline-flex;">
+          <div class="nav-logo-icon">💧</div>
+          AquaPure
+        </a>
+        <p>Your trusted local water refilling station. Pure, safe, and affordable drinking water — delivered or ready for pick-up, seven days a week.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <ul class="footer-links">
+          <li><a href="#features">Why Us</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#quality">Water Quality</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#products">Purified Water</a></li>
+          <li><a href="#products">Mineral Water</a></li>
+          <li><a href="#products">Alkaline Water</a></li>
+          <li><a href="#products">Bulk / Office Orders</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="#">+63 9XX XXX XXXX</a></li>
+          <li><a href="#">WhatsApp Us</a></li>
+          <li><a href="#">Facebook Page</a></li>
+          <li><a href="#booking">Order Now</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 AquaPure Water Refilling Station. All rights reserved.</div>
+      <div class="footer-social">
+        <a href="#" class="social-btn">📘</a>
+        <a href="#" class="social-btn">💬</a>
+        <a href="#" class="social-btn">📸</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CHAT TOGGLE -->
+<button id="chat-toggle" onclick="toggleChat()">💬</button>
+<div id="chat-window">
+  <div class="chat-header">
+    <div class="chat-avatar">💧</div>
+    <div>
+      <div class="chat-name">AquaPure Support</div>
+      <div class="chat-status">● Online — Usually replies instantly</div>
+    </div>
+  </div>
+  <div class="chat-body" id="chat-body">
+    <div class="chat-msg">Hi! 👋 Welcome to AquaPure. How can we help you today?</div>
+    <div class="chat-quick" id="chat-quick">
+      <button class="chat-qbtn" onclick="chatAnswer('pricing')">💰 Pricing & Products</button>
+      <button class="chat-qbtn" onclick="chatAnswer('delivery')">🚚 Delivery Info</button>
+      <button class="chat-qbtn" onclick="chatAnswer('quality')">🔬 Water Quality</button>
+      <button class="chat-qbtn" onclick="chatAnswer('order')">📋 How to Order</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Scroll bar
+  window.addEventListener('scroll', () => {
+    const el = document.getElementById('scroll-bar');
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    el.style.width = pct + '%';
+    const nav = document.getElementById('navbar');
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // FAQ
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+
+  // Chat
+  function toggleChat() {
+    document.getElementById('chat-window').classList.toggle('open');
+  }
+
+  const chatAnswers = {
+    pricing: { q: '💰 Pricing & Products', a: 'We offer: 1 Gallon (₱10), 5-Gallon Slim Jug (₱35), 5-Gallon Wide Mouth (₱40), and Bulk/Office orders (₱30/gallon). All types — Purified, Mineral, or Alkaline. Materials included!' },
+    delivery: { q: '🚚 Delivery Info', a: 'Same-day delivery for orders placed before 2PM! Free delivery for orders ₱200+. Below ₱200, flat ₱20 fee. We deliver within 3km of our station. Track your order via WhatsApp.' },
+    quality: { q: '🔬 Water Quality', a: 'We\'re DOH-certified with 7-stage purification: Sediment → Carbon → Softener → Reverse Osmosis → UV Sterilization → Ozonation → Remineralization. Monthly lab tests available!' },
+    order: { q: '📋 How to Order', a: 'Fill out the order form on our website, message us on WhatsApp, or visit our station directly. We\'re open Mon–Sat 7AM–7PM, Sunday 8AM–5PM. Easy!' },
+  };
+
+  function chatAnswer(key) {
+    const body = document.getElementById('chat-body');
+    document.getElementById('chat-quick').style.display = 'none';
+    const { q, a } = chatAnswers[key];
+    body.innerHTML += `<div class="chat-msg user">${q}</div>`;
+    body.innerHTML += `<div class="chat-typing"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>`;
+    body.scrollTop = body.scrollHeight;
+    setTimeout(() => {
+      body.querySelector('.chat-typing').remove();
+      body.innerHTML += `<div class="chat-msg">${a}</div>`;
+      body.innerHTML += `<div class="chat-msg">Anything else? <a href="#booking" style="color:var(--blue);">Place an order →</a></div>`;
+      body.scrollTop = body.scrollHeight;
+    }, 1000);
+  }
+
+  // Order form → WhatsApp
+  document.getElementById('order-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const form = e.target;
+    const inputs = form.querySelectorAll('input, select');
+    const fname = inputs[0].value;
+    const lname = inputs[1].value;
+    const phone = inputs[2].value;
+    const product = inputs[3].value;
+    const waterType = inputs[4].value;
+    const qty = inputs[5].value;
+    const method = inputs[6].value;
+    const address = inputs[7].value;
+    const date = inputs[8].value;
+    const msg = `💧 *AquaPure Order*\n\n*Name:* ${fname} ${lname}\n*Phone:* ${phone}\n*Product:* ${product}\n*Water Type:* ${waterType}\n*Quantity:* ${qty}\n*Method:* ${method}${address ? '\n*Address:* ' + address : ''}${date ? '\n*Schedule:* ' + date : ''}\n\nPlease confirm my order. Thank you!`;
+    window.open(`https://wa.me/639XXXXXXXXX?text=${encodeURIComponent(msg)}`, '_blank');
+  });
+
+  // Hide address if pick-up selected
+  document.querySelectorAll('.form-select').forEach(sel => {
+    sel.addEventListener('change', function() {
+      if (this.value === 'Station Pick-Up') {
+        document.getElementById('address-group').style.display = 'none';
+      } else if (this.value === 'Home Delivery') {
+        document.getElementById('address-group').style.display = 'block';
+      }
+    });
+  });
+</script>
+</body>
+</html>
