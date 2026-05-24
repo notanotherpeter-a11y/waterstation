@@ -459,17 +459,17 @@
       <div class="section-label reveal section-head-center">[ 02 ] Products & Pricing</div>
       <h2 class="section-title reveal section-head-center">Simple, Honest Pricing.</h2>
       <p class="section-sub reveal section-head-center">Pick the size that fits your household. All prices include container sanitization.</p>
-      <div class="products-grid">
+      <div class="products-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
         <div class="product-card reveal">
-          <span class="product-icon">🥤</span>
-          <div class="product-name">Round Container</div>
-          <div class="product-size">[ 1 Gallon · ~3.8L ]</div>
+          <img src="gallon.jpg" alt="1 Gallon" class="product-photo">
+          <div class="product-name">1 Gallon Refill</div>
+          <div class="product-size">[ ~3.8 Liters ]</div>
           <div class="product-price"><span class="currency">₱</span>10</div>
-          <div class="product-price-note">per refill</div>
+          <div class="product-price-note">per gallon</div>
           <ul class="product-features">
             <li>Purified or Alkaline</li>
-            <li>Great for travel mugs</li>
             <li>Container sanitized</li>
+            <li>Walk-in or delivery</li>
           </ul>
           <a href="#booking" class="btn btn-product">Order →</a>
         </div>
@@ -477,13 +477,12 @@
           <div class="popular-tag">Most Popular</div>
           <div class="promo-tag">🎁 +1 FREE</div>
           <img src="gallon.jpg" alt="5 Gallon" class="product-photo">
-          <div class="product-name">Gallon</div>
-          <div class="product-size">[ 5 Gallons · ~18.9L ]</div>
-          <div class="product-price"><span class="currency">₱</span>50</div>
-          <div class="product-price-note">per refill · get 1 gallon FREE</div>
+          <div class="product-name">5 Gallon Refill</div>
+          <div class="product-size">[ ~18.9 Liters ]</div>
+          <div class="product-price"><span class="currency">₱</span>10</div>
+          <div class="product-price-note">per gallon · ₱50 total · +1 FREE 🎁</div>
           <ul class="product-features">
             <li>Purified, Mineral, or Alkaline</li>
-            <li>Fits standard dispensers</li>
             <li>Free delivery over ₱200</li>
             <li>Container sanitized</li>
           </ul>
@@ -491,16 +490,15 @@
         </div>
         <div class="product-card reveal">
           <div class="promo-tag">🎁 +2 FREE</div>
-          <img src="gallon.jpg" alt="Bulk Refill Gallon" class="product-photo">
-          <div class="product-name">Bulk Refill</div>
-          <div class="product-size">[ 10+ Gallons · Group / Office ]</div>
+          <img src="gallon.jpg" alt="Bulk Refill" class="product-photo">
+          <div class="product-name">Bulk Refill (10+ gal)</div>
+          <div class="product-size">[ Office / Group ]</div>
           <div class="product-price"><span class="currency">₱</span>10</div>
-          <div class="product-price-note">per gallon · get 2 gallons FREE</div>
+          <div class="product-price-note">per gallon · +2 FREE gallons 🎁</div>
           <ul class="product-features">
             <li>Best for offices & events</li>
-            <li>Priority scheduling</li>
             <li>Free delivery included</li>
-            <li>Monthly subscription available</li>
+            <li>Monthly schedule available</li>
           </ul>
           <a href="#booking" class="btn btn-product">Order →</a>
         </div>
@@ -824,9 +822,9 @@
           <label class="form-label">Product *</label>
           <select class="form-input form-select" required>
             <option value="" disabled selected>Choose a product</option>
-            <option>1 Gallon (₱10)</option>
-            <option>5 Gallons / Gallon (₱50 + 1 FREE)</option>
-            <option>Bulk / Office 10+ Gallons (₱10/gal + 2 FREE)</option>
+            <option>1 Gallon — ₱10</option>
+            <option>5 Gallons — ₱50 + 1 FREE gallon</option>
+            <option>Bulk 10+ Gallons — ₱10/gal + 2 FREE gallons</option>
           </select>
         </div>
         <div class="form-row">
