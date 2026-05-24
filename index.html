@@ -128,6 +128,19 @@
     .product-card:hover::before { opacity: 1; }
     .product-card.popular { border-color: rgba(0,180,255,0.35); box-shadow: 0 0 40px rgba(0,180,255,0.08); }
     .popular-tag { position: absolute; top: 1rem; right: 1rem; background: linear-gradient(135deg, var(--blue), var(--teal)); color: #fff; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em; padding: 0.2rem 0.6rem; border-radius: 100px; text-transform: uppercase; }
+    .promo-tag { position: absolute; top: 1rem; left: 1rem; background: linear-gradient(135deg, #ff6b35, #f7c948); color: #1a0a00; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.08em; padding: 0.2rem 0.65rem; border-radius: 100px; text-transform: uppercase; font-weight: 700; }
+
+    /* Promo Banner */
+    .promo-banner { background: linear-gradient(135deg, rgba(255,107,53,0.08), rgba(247,201,72,0.06)); border: 1px solid rgba(247,201,72,0.2); border-radius: var(--r2); padding: 2.5rem 2rem; margin-top: 2.5rem; position: relative; overflow: hidden; }
+    .promo-banner::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(247,201,72,0.08) 0%, transparent 70%); }
+    .promo-banner-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; color: #f7c948; text-transform: uppercase; margin-bottom: 0.6rem; }
+    .promo-banner-title { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+    .promo-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+    .promo-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(247,201,72,0.25); border-radius: var(--r); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1rem; }
+    .promo-card-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .promo-card-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .promo-card-free { color: #f7c948; font-weight: 800; }
+    .promo-card-desc { font-size: 0.78rem; color: var(--text2); line-height: 1.5; }
     .product-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
     .product-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.25rem; }
     .product-size { font-family: var(--mono); font-size: 0.7rem; color: var(--text3); margin-bottom: 1.5rem; }
@@ -495,11 +508,12 @@
         </div>
         <div class="product-card popular reveal">
           <div class="popular-tag">Most Popular</div>
+          <div class="promo-tag">🎁 +1 FREE</div>
           <span class="product-icon">🫙</span>
           <div class="product-name">Standard Slim Jug</div>
           <div class="product-size">[ 5 Gallons · ~18.9L ]</div>
           <div class="product-price"><span class="currency">₱</span>50</div>
-          <div class="product-price-note">per refill</div>
+          <div class="product-price-note">per refill · get 1 gallon FREE</div>
           <ul class="product-features">
             <li>Purified, Mineral, or Alkaline</li>
             <li>Fits standard dispensers</li>
@@ -509,11 +523,12 @@
           <a href="#booking" class="btn btn-product btn-primary">Order →</a>
         </div>
         <div class="product-card reveal">
+          <div class="promo-tag">🎁 +1 FREE</div>
           <span class="product-icon">🪣</span>
           <div class="product-name">Wide Mouth Jug</div>
           <div class="product-size">[ 5 Gallons · ~18.9L ]</div>
           <div class="product-price"><span class="currency">₱</span>50</div>
-          <div class="product-price-note">per refill</div>
+          <div class="product-price-note">per refill · get 1 gallon FREE</div>
           <ul class="product-features">
             <li>Purified, Mineral, or Alkaline</li>
             <li>Wide-neck for easy cleaning</li>
@@ -523,11 +538,12 @@
           <a href="#booking" class="btn btn-product">Order →</a>
         </div>
         <div class="product-card reveal">
+          <div class="promo-tag">🎁 +2 FREE</div>
           <span class="product-icon">🛢️</span>
           <div class="product-name">Bulk Refill</div>
           <div class="product-size">[ 10+ Gallons · Group / Office ]</div>
           <div class="product-price"><span class="currency">₱</span>10</div>
-          <div class="product-price-note">per gallon</div>
+          <div class="product-price-note">per gallon · get 2 gallons FREE</div>
           <ul class="product-features">
             <li>Best for offices & events</li>
             <li>Priority scheduling</li>
@@ -535,6 +551,31 @@
             <li>Monthly subscription available</li>
           </ul>
           <a href="#booking" class="btn btn-product">Order →</a>
+        </div>
+      </div>
+
+      <!-- Promo Banner -->
+      <div class="promo-banner reveal">
+        <div class="promo-banner-label">🔥 Limited Promos</div>
+        <div class="promo-banner-title">More Water, More Savings!</div>
+        <p style="font-size:0.88rem;color:var(--text2);">Order more and get free gallons on us. Promos apply automatically — no voucher needed.</p>
+        <div class="promo-cards">
+          <div class="promo-card">
+            <div class="promo-card-icon">🫙</div>
+            <div>
+              <div class="promo-card-title">Refill 5 Gallons</div>
+              <div class="promo-card-free">+ 1 Gallon FREE 🎁</div>
+              <div class="promo-card-desc">Get 6 gallons total for the price of 5. Perfect for the whole family!</div>
+            </div>
+          </div>
+          <div class="promo-card">
+            <div class="promo-card-icon">🛢️</div>
+            <div>
+              <div class="promo-card-title">Refill 10 Gallons</div>
+              <div class="promo-card-free">+ 2 Gallons FREE 🎁</div>
+              <div class="promo-card-desc">Get 12 gallons total for the price of 10. Best deal for offices & big families!</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -949,7 +990,7 @@
   }
 
   const chatAnswers = {
-    pricing: { q: '💰 Pricing & Products', a: 'We offer: 1 Gallon (₱10), 5-Gallon Slim Jug (₱50), 5-Gallon Wide Mouth (₱50), and Bulk/Office orders (₱10/gallon). All types — Purified, Mineral, or Alkaline. Materials included!' },
+    pricing: { q: '💰 Pricing & Products', a: 'We offer: 1 Gallon (₱10), 5-Gallon Jug (₱50 + 1 FREE gallon 🎁), and Bulk/Office 10+ gallons (₱10/gal + 2 FREE gallons 🎁). All types — Purified, Mineral, or Alkaline. Materials included!' },
     delivery: { q: '🚚 Delivery Info', a: 'Same-day delivery for orders placed before 2PM! Free delivery for orders ₱200+. Below ₱200, flat ₱20 fee. We deliver within 3km of our station. Track your order via WhatsApp.' },
     quality: { q: '🔬 Water Quality', a: 'We\'re DOH-certified with 7-stage purification: Sediment → Carbon → Softener → Reverse Osmosis → UV Sterilization → Ozonation → Remineralization. Monthly lab tests available!' },
     order: { q: '📋 How to Order', a: 'Fill out the order form on our website, message us on WhatsApp, or visit our station directly. We\'re open Mon–Sat 7AM–7PM, Sunday 8AM–5PM. Easy!' },
