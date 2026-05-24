@@ -130,6 +130,22 @@
     .popular-tag { position: absolute; top: 1rem; right: 1rem; background: linear-gradient(135deg, var(--blue), var(--teal)); color: #fff; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em; padding: 0.2rem 0.6rem; border-radius: 100px; text-transform: uppercase; }
     .promo-tag { position: absolute; top: 1rem; left: 1rem; background: linear-gradient(135deg, #ff6b35, #f7c948); color: #1a0a00; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.08em; padding: 0.2rem 0.65rem; border-radius: 100px; text-transform: uppercase; font-weight: 700; }
 
+    /* GCash Section */
+    .gcash-section { background: linear-gradient(135deg, rgba(0,100,200,0.06), rgba(0,180,255,0.04)); border-top: 1px solid var(--border2); border-bottom: 1px solid var(--border2); }
+    .gcash-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    @media (max-width: 768px) { .gcash-layout { grid-template-columns: 1fr; gap: 2rem; } }
+    .gcash-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(0,100,220,0.1); border: 1px solid rgba(0,100,220,0.25); border-radius: 100px; padding: 0.3rem 0.9rem 0.3rem 0.6rem; margin-bottom: 1rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: #60a0ff; text-transform: uppercase; }
+    .gcash-services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    .gcash-service-card { background: var(--bg2); border: 1px solid var(--border2); border-radius: var(--r); padding: 1.1rem; transition: border-color 0.25s, transform 0.25s; }
+    .gcash-service-card:hover { border-color: rgba(0,100,220,0.35); transform: translateY(-2px); }
+    .gcash-service-icon { font-size: 1.4rem; margin-bottom: 0.4rem; }
+    .gcash-service-name { font-size: 0.82rem; font-weight: 700; margin-bottom: 0.15rem; }
+    .gcash-service-desc { font-size: 0.74rem; color: var(--text2); line-height: 1.5; }
+    .gcash-number { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(0,100,220,0.08); border: 1px solid rgba(0,100,220,0.2); border-radius: var(--r); padding: 0.6rem 1rem; font-family: var(--mono); font-size: 0.88rem; font-weight: 600; color: var(--text); margin-top: 1rem; }
+    .gcash-number-label { font-size: 0.65rem; color: var(--text3); margin-top: 0.2rem; }
+    .payment-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.25rem; }
+    .pay-chip { display: flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border2); border-radius: var(--r); padding: 0.4rem 0.85rem; font-size: 0.78rem; color: var(--text2); }
+
     /* Promo Banner */
     .promo-banner { background: linear-gradient(135deg, rgba(255,107,53,0.08), rgba(247,201,72,0.06)); border: 1px solid rgba(247,201,72,0.2); border-radius: var(--r2); padding: 2.5rem 2rem; margin-top: 2.5rem; position: relative; overflow: hidden; }
     .promo-banner::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(247,201,72,0.08) 0%, transparent 70%); }
@@ -298,7 +314,7 @@
   <ul class="nav-links">
     <li><a href="#features">Why Us</a></li>
     <li><a href="#products">Products</a></li>
-    <li><a href="#how">How It Works</a></li>
+    <li><a href="#gcash">GCash</a></li>
     <li><a href="#delivery">Delivery</a></li>
     <li><a href="#booking">Order</a></li>
   </ul>
@@ -614,6 +630,62 @@
   </div>
 </section>
 
+<!-- GCASH SERVICES -->
+<div class="gcash-section">
+  <section id="gcash">
+    <div class="gcash-layout">
+      <div>
+        <div class="gcash-badge">💙 GCash Services Available</div>
+        <div class="section-label reveal">[ 04 ] GCash Services</div>
+        <h2 class="section-title reveal">We Also Offer<br>GCash Services.</h2>
+        <p class="section-sub reveal" style="margin-bottom:1.5rem;">Beyond clean water — we provide convenient GCash services right at our station. No need to go far for your digital money needs.</p>
+        <div class="reveal">
+          <div class="gcash-number">
+            📱 0908 653 8924
+          </div>
+          <div class="gcash-number-label" style="margin-left:0.25rem;">GCash-registered number</div>
+        </div>
+        <div class="payment-chips reveal" style="margin-top:1.5rem;">
+          <div class="pay-chip">💵 Cash accepted</div>
+          <div class="pay-chip">📱 GCash accepted</div>
+        </div>
+      </div>
+      <div class="gcash-services-grid reveal">
+        <div class="gcash-service-card">
+          <div class="gcash-service-icon">📥</div>
+          <div class="gcash-service-name">Cash In</div>
+          <div class="gcash-service-desc">Load money into your GCash wallet quickly and easily at our station.</div>
+        </div>
+        <div class="gcash-service-card">
+          <div class="gcash-service-icon">📤</div>
+          <div class="gcash-service-name">Cash Out</div>
+          <div class="gcash-service-desc">Withdraw cash from your GCash balance — fast and hassle-free.</div>
+        </div>
+        <div class="gcash-service-card">
+          <div class="gcash-service-icon">📲</div>
+          <div class="gcash-service-name">Send Money</div>
+          <div class="gcash-service-desc">Transfer funds to any GCash number or bank account on the spot.</div>
+        </div>
+        <div class="gcash-service-card">
+          <div class="gcash-service-icon">💳</div>
+          <div class="gcash-service-name">Bills Payment</div>
+          <div class="gcash-service-desc">Pay electricity, water, internet, and other bills via GCash.</div>
+        </div>
+        <div class="gcash-service-card">
+          <div class="gcash-service-icon">📦</div>
+          <div class="gcash-service-name">Load / E-Pins</div>
+          <div class="gcash-service-desc">Buy mobile load for any network — Globe, Smart, TNT, and more.</div>
+        </div>
+        <div class="gcash-service-card">
+          <div class="gcash-service-icon">🛍️</div>
+          <div class="gcash-service-name">GCash QR Pay</div>
+          <div class="gcash-service-desc">Pay for your water refill and GCash services via QR scan — no cash needed.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
 <hr class="divider">
 
 <!-- WHY US — Detailed -->
@@ -650,7 +722,7 @@
       </div>
     </div>
     <div class="why-content">
-      <div class="section-label reveal">[ 04 ] Our Standards</div>
+      <div class="section-label reveal">[ 05 ] Our Standards</div>
       <h2 class="section-title reveal">We Take Water<br>Quality Seriously.</h2>
       <ul class="why-list">
         <li class="why-item reveal">
@@ -691,7 +763,7 @@
   <section id="delivery">
     <div class="delivery-layout">
       <div class="delivery-info">
-        <div class="section-label reveal">[ 05 ] Delivery</div>
+        <div class="section-label reveal">[ 06 ] Delivery</div>
         <h2 class="reveal">We Deliver to<br>Your Doorstep.</h2>
         <p class="reveal">Free delivery for orders ₱200 and above. Orders below ₱200 have a minimal ₱20 delivery fee. We cover the entire barangay and surrounding areas.</p>
         <div class="delivery-chips reveal">
@@ -730,7 +802,7 @@
 
 <!-- TESTIMONIALS -->
 <section id="testimonials">
-  <div class="section-label reveal section-head-center">[ 06 ] Reviews</div>
+  <div class="section-label reveal section-head-center">[ 07 ] Reviews</div>
   <h2 class="section-title reveal section-head-center">What Our Customers Say.</h2>
   <div class="testi-grid">
     <div class="testi-card reveal">
@@ -775,7 +847,7 @@
 <section id="booking">
   <div class="booking-layout">
     <div class="booking-info">
-      <div class="section-label reveal">[ 07 ] Order Now</div>
+      <div class="section-label reveal">[ 08 ] Order Now</div>
       <h2 class="reveal">Ready for Clean<br>Water at Home?</h2>
       <p class="reveal">Fill in the form and we'll send your order details straight to WhatsApp. We'll confirm and arrange delivery or pick-up in minutes.</p>
       <div class="contact-item reveal">
@@ -861,7 +933,7 @@
 
 <!-- FAQ -->
 <section id="faq">
-  <div class="section-label reveal section-head-center">[ 08 ] FAQ</div>
+  <div class="section-label reveal section-head-center">[ 09 ] FAQ</div>
   <h2 class="section-title reveal section-head-center">Common Questions.</h2>
   <div class="faq-list">
     <div class="faq-item reveal">
@@ -956,7 +1028,7 @@
     <div class="chat-quick" id="chat-quick">
       <button class="chat-qbtn" onclick="chatAnswer('pricing')">💰 Pricing & Products</button>
       <button class="chat-qbtn" onclick="chatAnswer('delivery')">🚚 Delivery Info</button>
-      <button class="chat-qbtn" onclick="chatAnswer('quality')">🔬 Water Quality</button>
+      <button class="chat-qbtn" onclick="chatAnswer('gcash')">💙 GCash Services</button>
       <button class="chat-qbtn" onclick="chatAnswer('order')">📋 How to Order</button>
     </div>
   </div>
@@ -994,6 +1066,7 @@
     delivery: { q: '🚚 Delivery Info', a: 'Same-day delivery for orders placed before 2PM! Free delivery for orders ₱200+. Below ₱200, flat ₱20 fee. We deliver within 3km of our station. Track your order via WhatsApp.' },
     quality: { q: '🔬 Water Quality', a: 'We\'re DOH-certified with 7-stage purification: Sediment → Carbon → Softener → Reverse Osmosis → UV Sterilization → Ozonation → Remineralization. Monthly lab tests available!' },
     order: { q: '📋 How to Order', a: 'Fill out the order form on our website, message us on WhatsApp, or visit our station directly. We\'re open Mon–Sat 7AM–7PM, Sunday 8AM–5PM. Easy!' },
+    gcash: { q: '💙 GCash Services', a: 'Yes, we offer GCash services! Cash In, Cash Out, Send Money, Bills Payment, Mobile Load, and QR Pay. GCash number: 0908 653 8924. We also accept GCash as payment for water refills!' },
   };
 
   function chatAnswer(key) {
